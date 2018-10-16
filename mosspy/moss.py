@@ -122,10 +122,12 @@ class Moss:
             raise Exception("send() => Language not accepted by server")
 
         for file_path, display_name in self.base_files:
+            print('uploading (base file) %s' % file_path)
             self.uploadFile(s, file_path, display_name, 0)
 
         index = 1
         for file_path, display_name in self.files:
+            print('uploading %s' % file_path)
             self.uploadFile(s, file_path, display_name, index)
             index += 1
 
