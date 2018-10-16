@@ -133,6 +133,7 @@ class Moss:
 
         s.send("query 0 {}\n".format(self.options['c']).encode())
 
+        print('waiting for results')
         response = s.recv(1024)
 
         s.send(b"end\n")
