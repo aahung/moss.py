@@ -25,6 +25,9 @@ def process_url(url, urls, base_url, path):
             link = more_url.get('src')
 
         if link and (link.find("match") != -1): # Download only results urls
+            hash_value = None
+            if len(link.split('#')) == 2:
+                hash_value = link.split('#')[1]
             link = link.split('#')[0]  # remove fragment from url
             basename = os.path.basename(link)
 
@@ -32,9 +35,9 @@ def process_url(url, urls, base_url, path):
                 link = base_url + basename
 
             if more_url.name == "a":
-                more_url['href'] = basename
+                more_url['href'] = basename + '#' + hash_value if hash_value else basename
             elif more_url.name == "frame":
-                more_url['src'] = basename
+                more_url['src'] = basename + '#' + hash_value if hash_value else basename
 
             if link not in urls:                    
                 urls.append(link)
